@@ -1,4 +1,4 @@
-name: Generate Pac-Man Game Overlay
+name: Generate Pac-Man Game on Contributions
 
 on:
   schedule:
@@ -16,124 +16,236 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Generate Pac-Man game on contributions
+      - name: Generate base contribution graph
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: Rakshit05code
           outputs: |
-            dist/github-contribution-grid-snake.svg?palette=github-light&color_snake=#FFFF00&color_dots=#EBEDF0,#C6E48B,#7BC96F,#239A3B,#196127&snake_length=3&snake_speed=slow
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#FFFF00&color_dots=#0D1117,#0E4429,#006D32,#26A641,#39D353&snake_length=3&snake_speed=slow
+            dist/github-contribution-grid-snake.svg?palette=github-light&color_snake=transparent&color_dots=#EBEDF0,#C6E48B,#7BC96F,#239A3B,#196127
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=transparent&color_dots=#0D1117,#0E4429,#006D32,#26A641,#39D353
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Create Pac-Man game overlay
         run: |
           mkdir -p dist
-          cat > dist/pacman-overlay.svg << 'EOF'
-          <svg width="721" height="110" xmlns="http://www.w3.org/2000/svg">
+          cat > dist/pacman-game-overlay.svg << 'EOF'
+          <svg width="721" height="110" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
             <defs>
               <style>
-                .pacman { fill: #FFFF00; animation: chomp 0.5s infinite; }
-                .ghost-red { fill: #FF0000; animation: float 2s ease-in-out infinite; }
-                .ghost-pink { fill: #FFB8FF; animation: float 2s ease-in-out infinite 0.5s; }
-                .ghost-blue { fill: #00FFFF; animation: float 2s ease-in-out infinite 1s; }
-                .ghost-orange { fill: #FFB852; animation: float 2s ease-in-out infinite 1.5s; }
-                .dot { fill: #FFFFFF; animation: blink 1s infinite; }
-                .power-pellet { fill: #FFFFFF; animation: pulse 0.8s infinite; }
-                
-                @keyframes chomp {
-                  0%, 100% { d: path("M 15,15 A 10,10 0 1,1 15,5 L 15,15 Z"); }
-                  50% { d: path("M 15,15 A 10,10 0 1,1 5,15 L 15,15 Z"); }
+                .pacman {
+                  fill: #FFFF00;
+                  stroke: #FFD700;
+                  stroke-width: 1;
+                  animation: pacman-chomp 0.5s infinite, pacman-move 8s linear infinite;
+                  transform-origin: center;
                 }
                 
-                @keyframes float {
+                .ghost {
+                  animation: ghost-float 2s ease-in-out infinite, ghost-chase 10s linear infinite;
+                }
+                
+                .ghost-red { fill: #FF0000; animation-delay: 0s; }
+                .ghost-pink { fill: #FFB8FF; animation-delay: 0.5s; }
+                .ghost-blue { fill: #00FFFF; animation-delay: 1s; }
+                .ghost-orange { fill: #FFB852; animation-delay: 1.5s; }
+                
+                .ghost-scared {
+                  fill: #0000FF !important;
+                  animation: ghost-scared-shake 0.3s infinite, ghost-flee 8s linear infinite;
+                }
+                
+                .dot {
+                  fill: #FFFFFF;
+                  animation: dot-collect 8s linear infinite;
+                  opacity: 1;
+                }
+                
+                .power-pellet {
+                  fill: #FFFFFF;
+                  animation: power-pulse 0.8s infinite, power-collect 8s linear infinite;
+                }
+                
+                .maze-wall {
+                  stroke: #7289DA;
+                  stroke-width: 2;
+                  fill: none;
+                  opacity: 0.6;
+                }
+                
+                .score-popup {
+                  fill: #FFFF00;
+                  font-family: 'Courier New', monospace;
+                  font-size: 8px;
+                  font-weight: bold;
+                  animation: score-popup 2s ease-out infinite;
+                }
+                
+                @keyframes pacman-chomp {
+                  0% { d: path("M 15,15 A 8,8 0 1,1 15,7 L 15,15 Z"); }
+                  50% { d: path("M 15,15 A 8,8 0 1,1 7,15 L 15,15 Z"); }
+                  100% { d: path("M 15,15 A 8,8 0 1,1 15,7 L 15,15 Z"); }
+                }
+                
+                @keyframes pacman-move {
+                  0% { transform: translateX(0px); }
+                  25% { transform: translateX(180px); }
+                  50% { transform: translateX(360px) scaleX(-1); }
+                  75% { transform: translateX(180px) scaleX(-1); }
+                  100% { transform: translateX(0px) scaleX(1); }
+                }
+                
+                @keyframes ghost-float {
                   0%, 100% { transform: translateY(0px); }
-                  50% { transform: translateY(-3px); }
+                  50% { transform: translateY(-2px); }
                 }
                 
-                @keyframes blink {
-                  0%, 50% { opacity: 1; }
-                  51%, 100% { opacity: 0.3; }
+                @keyframes ghost-chase {
+                  0% { transform: translateX(0px); }
+                  20% { transform: translateX(120px); }
+                  40% { transform: translateX(240px); }
+                  60% { transform: translateX(360px); }
+                  80% { transform: translateX(240px); }
+                  100% { transform: translateX(0px); }
                 }
                 
-                @keyframes pulse {
+                @keyframes ghost-scared-shake {
+                  0%, 100% { transform: translateX(0px); }
+                  25% { transform: translateX(-1px); }
+                  75% { transform: translateX(1px); }
+                }
+                
+                @keyframes ghost-flee {
+                  0% { transform: translateX(0px); }
+                  50% { transform: translateX(-100px); }
+                  100% { transform: translateX(0px); }
+                }
+                
+                @keyframes dot-collect {
+                  0% { opacity: 1; transform: scale(1); }
+                  12% { opacity: 1; transform: scale(1); }
+                  15% { opacity: 0; transform: scale(0); }
+                  100% { opacity: 0; transform: scale(0); }
+                }
+                
+                @keyframes power-pulse {
                   0%, 100% { transform: scale(1); opacity: 1; }
                   50% { transform: scale(1.3); opacity: 0.7; }
+                }
+                
+                @keyframes power-collect {
+                  0% { opacity: 1; }
+                  30% { opacity: 1; }
+                  35% { opacity: 0; }
+                  100% { opacity: 0; }
+                }
+                
+                @keyframes score-popup {
+                  0% { opacity: 0; transform: translateY(0px); }
+                  20% { opacity: 1; transform: translateY(-10px); }
+                  80% { opacity: 1; transform: translateY(-15px); }
+                  100% { opacity: 0; transform: translateY(-20px); }
                 }
               </style>
             </defs>
             
-            <!-- Pac-Man -->
-            <circle class="pacman" cx="120" cy="55" r="8"/>
-            
-            <!-- Ghosts -->
-            <g class="ghost-red">
-              <rect x="200" y="47" width="16" height="16" rx="8"/>
-              <polygon points="200,63 204,67 208,63 212,67 216,63 216,55 200,55"/>
-              <circle cx="204" cy="52" r="2" fill="white"/>
-              <circle cx="212" cy="52" r="2" fill="white"/>
-              <circle cx="204" cy="52" r="1" fill="black"/>
-              <circle cx="212" cy="52" r="1" fill="black"/>
+             Maze Walls 
+            <g class="maze">
+              <path class="maze-wall" d="M 50,25 L 150,25 L 150,35 L 200,35 L 200,25 L 300,25"/>
+              <path class="maze-wall" d="M 350,25 L 450,25 L 450,35 L 500,35 L 500,25 L 600,25"/>
+              <path class="maze-wall" d="M 50,85 L 150,85 L 150,75 L 200,75 L 200,85 L 300,85"/>
+              <path class="maze-wall" d="M 350,85 L 450,85 L 450,75 L 500,75 L 500,85 L 600,85"/>
+              <path class="maze-wall" d="M 100,45 L 100,65"/>
+              <path class="maze-wall" d="M 250,45 L 250,65"/>
+              <path class="maze-wall" d="M 400,45 L 400,65"/>
+              <path class="maze-wall" d="M 550,45 L 550,65"/>
             </g>
             
-            <g class="ghost-pink">
-              <rect x="350" y="47" width="16" height="16" rx="8"/>
-              <polygon points="350,63 354,67 358,63 362,67 366,63 366,55 350,55"/>
-              <circle cx="354" cy="52" r="2" fill="white"/>
-              <circle cx="362" cy="52" r="2" fill="white"/>
-              <circle cx="354" cy="52" r="1" fill="black"/>
-              <circle cx="362" cy="52" r="1" fill="black"/>
+             Dots 
+            <g class="dots">
+              <circle class="dot" cx="80" cy="55" r="2" style="animation-delay: 1s;"/>
+              <circle class="dot" cx="120" cy="55" r="2" style="animation-delay: 1.5s;"/>
+              <circle class="dot" cx="160" cy="55" r="2" style="animation-delay: 2s;"/>
+              <circle class="dot" cx="200" cy="55" r="2" style="animation-delay: 2.5s;"/>
+              <circle class="dot" cx="240" cy="55" r="2" style="animation-delay: 3s;"/>
+              <circle class="dot" cx="280" cy="55" r="2" style="animation-delay: 3.5s;"/>
+              <circle class="dot" cx="320" cy="55" r="2" style="animation-delay: 4s;"/>
+              <circle class="dot" cx="360" cy="55" r="2" style="animation-delay: 4.5s;"/>
+              <circle class="dot" cx="400" cy="55" r="2" style="animation-delay: 5s;"/>
+              <circle class="dot" cx="440" cy="55" r="2" style="animation-delay: 5.5s;"/>
+              <circle class="dot" cx="480" cy="55" r="2" style="animation-delay: 6s;"/>
+              <circle class="dot" cx="520" cy="55" r="2" style="animation-delay: 6.5s;"/>
+              <circle class="dot" cx="560" cy="55" r="2" style="animation-delay: 7s;"/>
             </g>
             
-            <g class="ghost-blue">
-              <rect x="500" y="47" width="16" height="16" rx="8"/>
-              <polygon points="500,63 504,67 508,63 512,67 516,63 516,55 500,55"/>
-              <circle cx="504" cy="52" r="2" fill="white"/>
-              <circle cx="512" cy="52" r="2" fill="white"/>
-              <circle cx="504" cy="52" r="1" fill="black"/>
-              <circle cx="512" cy="52" r="1" fill="black"/>
+             Power Pellets 
+            <circle class="power-pellet" cx="60" cy="55" r="5"/>
+            <circle class="power-pellet" cx="580" cy="55" r="5"/>
+            
+             Pac-Man 
+            <g class="pacman-container">
+              <circle class="pacman" cx="40" cy="55" r="8"/>
+              <path class="pacman" d="M 40,55 A 8,8 0 1,1 40,47 L 40,55 Z" fill="#FFFF00"/>
             </g>
             
-            <g class="ghost-orange">
-              <rect x="650" y="47" width="16" height="16" rx="8"/>
-              <polygon points="650,63 654,67 658,63 662,67 666,63 666,55 650,55"/>
-              <circle cx="654" cy="52" r="2" fill="white"/>
-              <circle cx="662" cy="52" r="2" fill="white"/>
-              <circle cx="654" cy="52" r="1" fill="black"/>
-              <circle cx="662" cy="52" r="1" fill="black"/>
+             Ghosts 
+            <g class="ghosts">
+               Red Ghost (Blinky) 
+              <g class="ghost ghost-red" style="transform: translate(100px, 47px);">
+                <rect width="16" height="12" rx="8" ry="8"/>
+                <polygon points="0,12 3,16 6,12 9,16 12,12 16,16 16,8 0,8"/>
+                <circle cx="4" cy="5" r="2" fill="white"/>
+                <circle cx="12" cy="5" r="2" fill="white"/>
+                <circle cx="4" cy="5" r="1" fill="black"/>
+                <circle cx="12" cy="5" r="1" fill="black"/>
+              </g>
+              
+               Pink Ghost (Pinky) 
+              <g class="ghost ghost-pink" style="transform: translate(140px, 47px);">
+                <rect width="16" height="12" rx="8" ry="8"/>
+                <polygon points="0,12 3,16 6,12 9,16 12,12 16,16 16,8 0,8"/>
+                <circle cx="4" cy="5" r="2" fill="white"/>
+                <circle cx="12" cy="5" r="2" fill="white"/>
+                <circle cx="4" cy="5" r="1" fill="black"/>
+                <circle cx="12" cy="5" r="1" fill="black"/>
+              </g>
+              
+               Blue Ghost (Inky) 
+              <g class="ghost ghost-blue" style="transform: translate(180px, 47px);">
+                <rect width="16" height="12" rx="8" ry="8"/>
+                <polygon points="0,12 3,16 6,12 9,16 12,12 16,16 16,8 0,8"/>
+                <circle cx="4" cy="5" r="2" fill="white"/>
+                <circle cx="12" cy="5" r="2" fill="white"/>
+                <circle cx="4" cy="5" r="1" fill="black"/>
+                <circle cx="12" cy="5" r="1" fill="black"/>
+              </g>
+              
+               Orange Ghost (Clyde) 
+              <g class="ghost ghost-orange" style="transform: translate(220px, 47px);">
+                <rect width="16" height="12" rx="8" ry="8"/>
+                <polygon points="0,12 3,16 6,12 9,16 12,12 16,16 16,8 0,8"/>
+                <circle cx="4" cy="5" r="2" fill="white"/>
+                <circle cx="12" cy="5" r="2" fill="white"/>
+                <circle cx="4" cy="5" r="1" fill="black"/>
+                <circle cx="12" cy="5" r="1" fill="black"/>
+              </g>
             </g>
             
-            <!-- Dots scattered throughout -->
-            <circle class="dot" cx="80" cy="30" r="1.5"/>
-            <circle class="dot" cx="160" cy="25" r="1.5"/>
-            <circle class="dot" cx="240" cy="35" r="1.5"/>
-            <circle class="dot" cx="320" cy="30" r="1.5"/>
-            <circle class="dot" cx="400" cy="25" r="1.5"/>
-            <circle class="dot" cx="480" cy="35" r="1.5"/>
-            <circle class="dot" cx="560" cy="30" r="1.5"/>
-            <circle class="dot" cx="640" cy="25" r="1.5"/>
+             Score Popups 
+            <text class="score-popup" x="100" y="40" style="animation-delay: 1.5s;">+10</text>
+            <text class="score-popup" x="200" y="40" style="animation-delay: 3s;">+10</text>
+            <text class="score-popup" x="300" y="40" style="animation-delay: 4.5s;">+10</text>
+            <text class="score-popup" x="60" y="40" style="animation-delay: 2s;">+50</text>
+            <text class="score-popup" x="400" y="40" style="animation-delay: 5.5s;">+200</text>
             
-            <circle class="dot" cx="100" cy="80" r="1.5"/>
-            <circle class="dot" cx="180" cy="85" r="1.5"/>
-            <circle class="dot" cx="260" cy="75" r="1.5"/>
-            <circle class="dot" cx="340" cy="80" r="1.5"/>
-            <circle class="dot" cx="420" cy="85" r="1.5"/>
-            <circle class="dot" cx="500" cy="75" r="1.5"/>
-            <circle class="dot" cx="580" cy="80" r="1.5"/>
-            <circle class="dot" cx="660" cy="85" r="1.5"/>
+             Game UI Elements 
+            <text x="10" y="15" fill="#FFFF00" font-family="monospace" font-size="10" font-weight="bold">SCORE: 2840</text>
+            <text x="10" y="105" fill="#FFFFFF" font-family="monospace" font-size="8">LEVEL 1</text>
+            <text x="650" y="15" fill="#FF6B6B" font-family="monospace" font-size="8">LIVES: ❤️❤️❤️</text>
             
-            <!-- Power Pellets -->
-            <circle class="power-pellet" cx="50" cy="55" r="4"/>
-            <circle class="power-pellet" cx="670" cy="55" r="4"/>
-            
-            <!-- Maze lines -->
-            <path d="M 30,20 L 90,20 L 90,40 L 130,40 L 130,20 L 190,20" stroke="white" stroke-width="2" fill="none"/>
-            <path d="M 230,20 L 290,20 L 290,40 L 330,40 L 330,20 L 390,20" stroke="white" stroke-width="2" fill="none"/>
-            <path d="M 430,20 L 490,20 L 490,40 L 530,40 L 530,20 L 590,20" stroke="white" stroke-width="2" fill="none"/>
-            
-            <path d="M 30,90 L 90,90 L 90,70 L 130,70 L 130,90 L 190,90" stroke="white" stroke-width="2" fill="none"/>
-            <path d="M 230,90 L 290,90 L 290,70 L 330,70 L 330,90 L 390,90" stroke="white" stroke-width="2" fill="none"/>
-            <path d="M 430,90 L 490,90 L 490,70 L 530,70 L 530,90 L 590,90" stroke="white" stroke-width="2" fill="none"/>
+             Ready/Game Over Text 
+            <text x="320" y="60" fill="#FFFF00" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" 
+                  style="animation: ready-blink 2s infinite;">READY!</text>
           </svg>
           EOF
           
