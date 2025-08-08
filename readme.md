@@ -156,15 +156,23 @@
 
 
 
-## 🎮 Pac-Man is eating my contributions!
+## 🎮 Pac-Man Game on My Contributions!
 
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake.svg">
-  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
-</picture>
+<!-- Pac-Man Game Overlay -->
+<div style="position: relative; display: inline-block;">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake.svg">
+    <img alt="github contribution grid" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
+  </picture>
+  
+  <!-- Pac-Man Game Elements Overlay -->
+  <img src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-overlay.svg" 
+       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;" 
+       alt="Pac-Man game overlay">
+</div>
 
 </div>
 
