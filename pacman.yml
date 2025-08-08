@@ -1,30 +1,32 @@
-name: Generate pacman animation
+name: Generate Pac-Man Contribution Graph
 
 on:
-  schedule: # execute every 12 hours
-    - cron: "* */12 * * *"
-
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
   workflow_dispatch:
-
   push:
     branches:
     - main
 
 jobs:
   generate:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-
+    timeout-minutes: 10
+    
     steps:
-      - name: generate pacman-contribution-graph.svg
-        uses: abozanona/pacman-contribution-graph@main
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Generate Pac-Man contribution graph
+        uses: Platane/snk/svg-only@v3
         with:
-          github_user_name: ${{ github.repository_owner }}
-
-
-      - name: push pacman-contribution-graph.svg to the output branch
+          github_user_name: Rakshit05code
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#7289DA&color_dots=#2C2F33,#36393F,#4F545C,#7289DA,#99AAB5
+            dist/pacman-contribution-graph.svg?palette=github-dark&color_snake=#FFFF00&color_dots=#2C2F33,#36393F,#4F545C,#7289DA,#99AAB5&snake_type=pacman
+            
+      - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
