@@ -156,28 +156,235 @@
 
 
 
-## 🎮 Pac-Man Game on My Contributions!
+## 🎮 Pac-Man Game Playing on My Contributions!
 
 <div align="center">
 
-<!-- Pac-Man Game Overlay -->
-<div style="position: relative; display: inline-block;">
+<div class="pacman-game-arena">
+  <style>
+    .pacman-game-arena {
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(135deg, #0D1117, #161B22);
+      padding: 20px;
+      border-radius: 15px;
+      border: 3px solid #7289DA;
+      box-shadow: 0 0 30px rgba(114, 137, 218, 0.3);
+      overflow: hidden;
+    }
+    
+    .game-overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .pacman-player {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: radial-gradient(circle, #FFFF00 60%, #FFD700 100%);
+      border-radius: 50%;
+      top: 45%;
+      left: 5%;
+      animation: pacman-journey 12s linear infinite;
+      z-index: 15;
+    }
+    
+    .pacman-player::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-left: 8px solid #0D1117;
+      right: -2px;
+      top: 0;
+      animation: pacman-mouth 0.3s infinite;
+    }
+    
+    .game-ghost {
+      position: absolute;
+      width: 14px;
+      height: 16px;
+      border-radius: 7px 7px 0 0;
+      top: 43%;
+      animation: ghost-patrol 10s linear infinite;
+      z-index: 12;
+    }
+    
+    .game-ghost::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 14px;
+      height: 4px;
+      background: inherit;
+      clip-path: polygon(0 0, 20% 100%, 40% 0, 60% 100%, 80% 0, 100% 100%, 100% 0);
+    }
+    
+    .ghost-blinky { background: #FF0000; left: 15%; animation-delay: -1s; }
+    .ghost-pinky { background: #FFB8FF; left: 25%; animation-delay: -2s; }
+    .ghost-inky { background: #00FFFF; left: 35%; animation-delay: -3s; }
+    .ghost-clyde { background: #FFB852; left: 45%; animation-delay: -4s; }
+    
+    .game-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      top: 48%;
+      animation: dot-disappear 12s linear infinite;
+      z-index: 8;
+    }
+    
+    .power-pellet {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      top: 46%;
+      animation: pellet-pulse 0.8s infinite, pellet-disappear 12s linear infinite;
+      z-index: 8;
+    }
+    
+    .game-score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #FFFF00;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 20;
+    }
+    
+    .game-lives {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #FF6B6B;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      z-index: 20;
+    }
+    
+    .ready-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #FFFF00;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      font-weight: bold;
+      animation: ready-blink 1.5s infinite;
+      z-index: 25;
+    }
+    
+    @keyframes pacman-journey {
+      0% { left: 5%; }
+      25% { left: 30%; }
+      50% { left: 55%; transform: scaleX(-1); }
+      75% { left: 30%; transform: scaleX(-1); }
+      100% { left: 5%; transform: scaleX(1); }
+    }
+    
+    @keyframes pacman-mouth {
+      0%, 100% { border-left-width: 8px; }
+      50% { border-left-width: 2px; }
+    }
+    
+    @keyframes ghost-patrol {
+      0% { left: 15%; }
+      20% { left: 25%; }
+      40% { left: 35%; }
+      60% { left: 45%; }
+      80% { left: 35%; }
+      100% { left: 15%; }
+    }
+    
+    @keyframes dot-disappear {
+      0% { opacity: 1; transform: scale(1); }
+      8% { opacity: 1; transform: scale(1); }
+      10% { opacity: 0; transform: scale(0); }
+      100% { opacity: 0; transform: scale(0); }
+    }
+    
+    @keyframes pellet-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+    
+    @keyframes pellet-disappear {
+      0% { opacity: 1; }
+      15% { opacity: 1; }
+      18% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    
+    @keyframes ready-blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.3; }
+    }
+  </style>
+  
+   Base Contribution Graph 
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake.svg">
     <img alt="github contribution grid" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
   </picture>
   
-  <!-- Pac-Man Game Elements Overlay -->
-  <img src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-overlay.svg" 
-       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;" 
-       alt="Pac-Man game overlay">
+   Game Overlay 
+  <div class="game-overlay">
+     Pac-Man 
+    <div class="pacman-player"></div>
+    
+     Ghosts 
+    <div class="game-ghost ghost-blinky"></div>
+    <div class="game-ghost ghost-pinky"></div>
+    <div class="game-ghost ghost-inky"></div>
+    <div class="game-ghost ghost-clyde"></div>
+    
+     Dots 
+    <div class="game-dot" style="left: 12%; animation-delay: 1s;"></div>
+    <div class="game-dot" style="left: 18%; animation-delay: 1.5s;"></div>
+    <div class="game-dot" style="left: 24%; animation-delay: 2s;"></div>
+    <div class="game-dot" style="left: 30%; animation-delay: 2.5s;"></div>
+    <div class="game-dot" style="left: 36%; animation-delay: 3s;"></div>
+    <div class="game-dot" style="left: 42%; animation-delay: 3.5s;"></div>
+    <div class="game-dot" style="left: 48%; animation-delay: 4s;"></div>
+    <div class="game-dot" style="left: 54%; animation-delay: 4.5s;"></div>
+    <div class="game-dot" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="game-dot" style="left: 66%; animation-delay: 5.5s;"></div>
+    <div class="game-dot" style="left: 72%; animation-delay: 6s;"></div>
+    
+     Power Pellets 
+    <div class="power-pellet" style="left: 8%;"></div>
+    <div class="power-pellet" style="left: 78%;"></div>
+    
+     Game UI 
+    <div class="game-score">SCORE: 2840</div>
+    <div class="game-lives">LIVES: ❤️❤️❤️</div>
+    <div class="ready-text">READY!</div>
+  </div>
 </div>
+
+<p style="margin-top: 15px; color: #7289DA; font-family: 'Courier New', monospace;">
+  🎮 <strong>Live Pac-Man Action!</strong> Watch the game play out on my GitHub contributions!
+</p>
 
 </div>
 
 ---
-
 ## 📊 GitHub Analytics Dashboard
 
 <div align="center">
