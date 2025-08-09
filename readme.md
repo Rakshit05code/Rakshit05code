@@ -209,18 +209,15 @@
 
 <div align="center">
 
-<a href="https://github.com/Rakshit05code/secure-web-app">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=secure-web-app&theme=discord&hide_border=true" />
+<a href="https://github.com/Rakshit05code/Amazon-Project">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=Amazon-Project&theme=dark&show_owner=false&show_icons=true&hide_border=true" />
 </a>
-<a href="https://github.com/Rakshit05code/react-security-dashboard">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=react-security-dashboard&theme=discord&hide_border=true" />
+<a href="https://github.com/Rakshit05code/Spam-Detection-Bot">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=Spam-Detection-Bot&theme=dark&show_owner=false&show_icons=true&hide_border=true" />
 </a>
 
-<a href="https://github.com/Rakshit05code/web-vulnerability-scanner">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=web-vulnerability-scanner&theme=discord&hide_border=true" />
-</a>
-<a href="https://github.com/Rakshit05code/nextjs-security-toolkit">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=nextjs-security-toolkit&theme=discord&hide_border=true" />
+<a href="https://github.com/Rakshit05code/modern-form-app">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Rakshit05code&repo=modern-form-app&theme=dark&show_owner=false&show_icons=true&hide_border=true" />
 </a>
 
 </div>
@@ -240,21 +237,7 @@ Hardware/IoT      30 mins         ░░░░░░░░░░░░░░░�
 
 <div align="center">
 
-[![Spotify](https://spotify-github-profile.vercel.app/api/spotify-playing?border_color=7289DA&bg_color=2C2F33)](https://spotify-github-profile.vercel.app/api/spotify-playing)
-
-</div>
-
----
-
-## 🎮 Fun Zone & Interactive Elements
-
-<div align="center">
-
-### 🎲 Random Programming Joke
-![Jokes Card](https://readme-jokes.vercel.app/api?theme=discord&borderColor=%237289DA)
-
-### 🏆 Profile Summary
-![Profile Summary](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Rakshit05code&theme=discord)
+[![Sapphire](https://th.bing.com/th/id/OIP.JcV0gTvspuxMjXJfD4tUQwHaHa?w=158&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3)](https://open.spotify.com/track/4Q0qVhFQa7j6jRKzo3HDmP)
 
 </div>
 
