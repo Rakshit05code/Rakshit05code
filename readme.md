@@ -107,6 +107,16 @@
 
 ---
 
+##  My Pac-Man Contribution Graph
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
+  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
+</picture>
+
+---
+
 ## 🚀 About Me
 
 <img align="right" alt="Coding GIF" width="400" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif">
@@ -125,16 +135,6 @@
 ---
 
 
-
-##  My Pac-Man Contribution Graph
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
-  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
-</picture>
-
----
 ## 📊 GitHub Analytics Dashboard
 
 <div align="center">
