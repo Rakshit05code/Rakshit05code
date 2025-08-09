@@ -126,31 +126,13 @@
 
 
 
-## 🎮 Pac-Man Game Playing on My Contributions!
+##  My Pac-Man Contribution Graph
 
-<div align="center">
-
- Base Contribution Graph 
-<div style="position: relative; display: inline-block;">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake.svg">
-    <img alt="github contribution grid" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/github-contribution-grid-snake-dark.svg" style="width: 100%; height: auto;">
-  </picture>
-  
-   Animated Pac-Man Game Overlay 
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-    <img src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-animated-game.svg" 
-         alt="Animated Pac-Man game" 
-         style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-</div>
-
-<p style="margin-top: 15px; color: #7289DA; font-family: 'Courier New', monospace; font-size: 14px;">
-  🎮 <strong>Live Pac-Man Game!</strong> Watch Pac-Man eat dots, avoid ghosts, and collect power pellets on my contribution graph!
-</p>
-
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
+  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/Rakshit05code/Rakshit05code/output/pacman-contribution-graph.svg">
+</picture>
 
 ---
 ## 📊 GitHub Analytics Dashboard
