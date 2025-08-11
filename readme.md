@@ -146,7 +146,7 @@
 
 <div align="center">
   
-<img src="https://streak-stats.demolab.com?user=Rakshit05code&locale=en&mode=daily&theme=discord&hide_border=true&border_radius=5" height="150" alt="streak graph" />
+<img src="https://streak-stats.demolab.com?user=Rakshit05code&locale=en&mode=daily&theme=github-dark&hide_border=true&border_radius=5" height="150" alt="streak graph" />
 
 </div>
 
